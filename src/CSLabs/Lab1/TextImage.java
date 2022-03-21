@@ -34,8 +34,4 @@ public class TextImage extends AbstractFigure {
         setCenterX(centerX + time * velocityX);
         setCenterY(centerY + time * velocityY);
     }
-
-    private void checkLeaveBorder() {
-
-    }
 }
