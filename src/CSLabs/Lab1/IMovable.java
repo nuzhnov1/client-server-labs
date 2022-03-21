@@ -1,5 +1,5 @@
 package CSLabs.Lab1;
 
-public interface Movable {
+public interface IMovable {
     void move(double time);
 }

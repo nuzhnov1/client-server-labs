@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.Container;
 
-public abstract class AbstractFigure extends JComponent implements MouseListener, Movable {
+public abstract class AbstractFigure extends JComponent implements MouseListener, IMovable {
     protected final Container parent;
 
     protected double centerX, centerY;
