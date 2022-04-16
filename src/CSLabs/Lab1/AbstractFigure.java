@@ -1,19 +1,19 @@
 package CSLabs.Lab1;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.Container;
 
-public abstract class AbstractFigure extends JComponent implements MouseListener, IMovable {
-    protected final Container parent;
+public abstract class AbstractFigure extends JComponent implements MouseListener, IMovable
+{
+    protected final double BOUNCE = -1.0;
 
     protected double centerX, centerY;
     protected double velocityX, velocityY;
     protected boolean isMove;
 
-    public AbstractFigure(Container parent) {
-        this.parent = parent;
+    public AbstractFigure() {
         isMove = true;
 
         setVisible(true);
@@ -66,13 +66,53 @@ public abstract class AbstractFigure extends JComponent implements MouseListener
     public boolean isMove() { return isMove; }
 
 
+    protected void checkWalls() {
+        Container parent = getParent();
+
+        if (parent == null)
+            return;
+
+        int imageX1 = getX();
+        int imageY1 = getY();
+        int imageX2 = imageX1 + getWidth();
+        int imageY2 = imageY1 + getHeight();
+
+        int canvasX1 = parent.getX();
+        int canvasY1 = parent.getY();
+        int canvasX2 = canvasX1 + parent.getWidth();
+        int canvasY2 = canvasY1 + parent.getHeight();
+
+        if (imageX2 > canvasX2) {
+            setCenterX(canvasX2 - getWidth() / 2.0);
+            velocityX *= BOUNCE;
+        }
+        else if (imageX1 < canvasX1) {
+            setCenterX(canvasX1 + getWidth() / 2.0);
+            velocityX *= BOUNCE;
+        }
+
+        if (imageY2 > canvasY2) {
+            setCenterY(canvasY2 - getHeight() / 2.0);
+            velocityY *= BOUNCE;
+        }
+        else if (imageY1 < canvasY1) {
+            setCenterY(canvasY1 + getHeight() / 2.0);
+            velocityY *= BOUNCE;
+        }
+    }
+
+
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         if (SwingUtilities.isLeftMouseButton(mouseEvent))
             setMove(!isMove);
 
-        if (SwingUtilities.isRightMouseButton(mouseEvent))
-            parent.remove(this);
+        if (SwingUtilities.isRightMouseButton(mouseEvent)) {
+            Container parent = getParent();
+
+            if (parent != null)
+                parent.remove(this);
+        }
     }
 
     @Override
