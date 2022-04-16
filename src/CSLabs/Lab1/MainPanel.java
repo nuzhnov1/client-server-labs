@@ -62,13 +62,13 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener {
     public void mousePressed(MouseEvent mouseEvent) {
         if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
             add(new LoadedImage(
-                    this, "images/Nut.png", mouseEvent.getX(), mouseEvent.getY(),
+                    "images/Nut.png", mouseEvent.getX(), mouseEvent.getY(),
                     100, 100
             ));
         }
 
         if (SwingUtilities.isRightMouseButton(mouseEvent)) {
-            add(new TextImage(this, "Справедливо", mouseEvent.getX(), mouseEvent.getY()));
+            add(new TextImage("Справедливо", mouseEvent.getX(), mouseEvent.getY()));
         }
     }
 

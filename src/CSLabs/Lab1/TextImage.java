@@ -8,7 +8,7 @@ public class TextImage extends AbstractFigure {
     private final String text;
     private final int initX, initY;
 
-    TextImage(Container parent, String text, int centerX, int centerY) {
+    TextImage(String text, int centerX, int centerY) {
         this.text = text;
         this.initX = centerX;
         this.initY = centerY;

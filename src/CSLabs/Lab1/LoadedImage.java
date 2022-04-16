@@ -6,7 +6,7 @@ import java.awt.*;
 public class LoadedImage extends AbstractFigure {
     private final ImageIcon image;
 
-    public LoadedImage(Container parent, String filename, int centerX, int centerY) {
+    public LoadedImage(String filename, int centerX, int centerY) {
         image = new ImageIcon(filename);
         setSize(image.getIconWidth(), image.getIconHeight());
         setCenter(centerX, centerY);
@@ -15,7 +15,7 @@ public class LoadedImage extends AbstractFigure {
         velocityY = (Math.random() * 2 - 1) * 100;
     }
 
-    public LoadedImage(Container parent, String filename, int centerX, int centerY, int width, int height) {
+    public LoadedImage(String filename, int centerX, int centerY, int width, int height) {
         image = new ImageIcon(filename);
         setSize(width, height);
         setCenter(centerX, centerY);
