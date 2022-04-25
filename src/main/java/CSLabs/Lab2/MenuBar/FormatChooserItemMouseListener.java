@@ -16,7 +16,7 @@ class FormatChooserItemMouseListener implements MouseListener {
         if (SwingUtilities.isLeftMouseButton(e)) {
             StateFormat selectedFormat = (StateFormat) JOptionPane.showInputDialog(
                     mainFrame,
-                    "Формат файла состояния:",
+                    "Выберите формат файла состояния:",
                     "Выбор формата файла состояния",
                     JOptionPane.INFORMATION_MESSAGE,
                     null,
@@ -24,13 +24,14 @@ class FormatChooserItemMouseListener implements MouseListener {
                     menuBar.getFormat()
             );
 
-            menuBar.setFormat(selectedFormat);
+            if (selectedFormat != null)
+                menuBar.setFormat(selectedFormat);
         }
         else if (SwingUtilities.isRightMouseButton(e)) {
             JOptionPane.showMessageDialog(
                     mainFrame,
                     """
-                    Выбор формата файла состояния, который будет помещён в zip-архив,
+                    Выбор формата файла состояния (файл state), который будет помещён в zip-архив,
                     при сохранении состояния программы.
                     """,
                     "Помощь",

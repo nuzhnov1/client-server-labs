@@ -5,9 +5,12 @@ import java.awt.*;
 
 @SuppressWarnings("unused")
 public class LoadedImage extends Figure {
-    private final String imageName;
+    // Data members
+
+    private final String imageName; // Unique image name
     private final ImageIcon image;
 
+    // Constructors:
 
     public LoadedImage(String imageName, ImageIcon image, double centerX, double centerY) {
         this.imageName = imageName;
@@ -31,10 +34,12 @@ public class LoadedImage extends Figure {
         velocityY = Utilities.randomRange(-MAX_SPEED, MAX_SPEED);
     }
 
+    // Getters:
 
     public String getImageName() { return imageName; }
     public ImageIcon getImage() { return image; }
 
+    // Overridden methods:
 
     @Override
     public void paint(Graphics g) {
@@ -47,9 +52,6 @@ public class LoadedImage extends Figure {
             return;
 
         checkWalls();
-        setCenter(
-                centerX + time * velocityX,
-                centerY + time * velocityY
-        );
+        setCenter(centerX + time * velocityX, centerY + time * velocityY);
     }
 }

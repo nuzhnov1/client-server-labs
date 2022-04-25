@@ -7,9 +7,12 @@ import CSLabs.Lab2.MainPanel.MainPanel;
 import CSLabs.Lab2.MenuBar.MenuBar;
 
 public class Main extends JFrame {
+    // Constants:
+
     public static final int FPS = 60;
     private static Main instance = null;
 
+    // Constructors:
 
     private Main() {
         setTitle("Лабораторная работа №2. Нужнов А.Н., Рымарь Р.А.");

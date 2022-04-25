@@ -4,12 +4,17 @@ import java.awt.*;
 
 @SuppressWarnings({"unused", "DuplicatedCode"})
 public class TextImage extends Figure {
+    // Constants:
+
     @SuppressWarnings("FieldCanBeLocal")
-    private final int RADIUS = 10;
+    private static final int RADIUS = 10;
+
+    // Data members:
 
     private final String text;
     private final double initX, initY;
 
+    // Constructors:
 
     public TextImage(String text, double centerX, double centerY) {
         this.text = text;
@@ -19,11 +24,13 @@ public class TextImage extends Figure {
         setCenter(initX, initY);
     }
 
+    // Getters:
 
     public String getText() { return text; }
     public double getInitX() { return initX; }
     public double getInitY() { return initY; }
 
+    // Other methods:
 
     private void checkArea() {
         if (Math.sqrt(Math.pow(centerX - initX, 2) + Math.pow(centerY - initY, 2)) >= RADIUS) {
@@ -34,6 +41,7 @@ public class TextImage extends Figure {
         }
     }
 
+    // Overridden methods:
 
     @Override
     public void paint(Graphics g) {

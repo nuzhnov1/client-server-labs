@@ -3,6 +3,7 @@ package CSLabs.Lab2.MenuBar;
 import CSLabs.Lab2.Main;
 import CSLabs.Lab2.MainPanel.Controller;
 import CSLabs.Lab2.MainPanel.MainPanel;
+import org.apache.commons.io.FilenameUtils;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -19,7 +20,7 @@ class SaveItemMouseListener implements MouseListener {
         if (SwingUtilities.isLeftMouseButton(e)) {
             JFileChooser fileChooser = new JFileChooser(menuBar.getCurrentDir());
 
-            fileChooser.setDialogTitle("Сохранение состояния");
+            fileChooser.setDialogTitle("Сохранение состояния в zip-архив");
             fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
             fileChooser.setAcceptAllFileFilterUsed(false);
             fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("zip","zip"));
@@ -32,6 +33,18 @@ class SaveItemMouseListener implements MouseListener {
                 File selectedFile = fileChooser.getSelectedFile();
                 File selectedDir = selectedFile.getParentFile();
 
+                String absolutePathToFile = selectedFile.getAbsolutePath();
+                String extension = FilenameUtils.getExtension(absolutePathToFile);
+
+                if (!extension.equals("zip")) {
+                    String pathToFile = selectedFile.getParent();
+                    String filename = selectedFile.getName();
+                    String separator = File.separator;
+                    String pathToFileWithExtension = pathToFile + separator + filename + ".zip";
+
+                    selectedFile = new File(pathToFileWithExtension);
+                }
+
                 menuBar.setCurrentDir(selectedDir);
 
                 try {
@@ -40,7 +53,7 @@ class SaveItemMouseListener implements MouseListener {
                 catch (Exception error) {
                     JOptionPane.showMessageDialog(
                             mainFrame,
-                            String.format("Ошибка: %s", error.getMessage()),
+                            "Сообщение об ошибке: " + error.getMessage(),
                             "Ошибка",
                             JOptionPane.ERROR_MESSAGE
                     );
@@ -57,7 +70,7 @@ class SaveItemMouseListener implements MouseListener {
             else {
                 JOptionPane.showMessageDialog(
                         mainFrame,
-                        "Ошибка при сохранении состояния!",
+                        "Ошибка при сохранении состояния",
                         "Ошибка",
                         JOptionPane.ERROR_MESSAGE
                 );
@@ -68,14 +81,13 @@ class SaveItemMouseListener implements MouseListener {
                     mainFrame,
                     """
                     Сохранение текущего состояние объектов программы в zip-архив, состоящий из
-                    файла состояния и изображений.
+                    файла состояния (state файл) и изображений, которые используются в отрисовке фигур.
                     """,
                     "Помощь",
                     JOptionPane.INFORMATION_MESSAGE
             );
         }
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {}

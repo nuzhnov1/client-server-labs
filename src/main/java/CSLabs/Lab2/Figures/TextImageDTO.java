@@ -6,10 +6,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @SuppressWarnings("unused")
 @JsonTypeName(value = "text")
 public class TextImageDTO extends FigureDTO {
+    // Data members:
+
     private String text;
     private double initX;
     private double initY;
 
+    // Constructors:
 
     public TextImageDTO(
             @JsonProperty(value = "centerX") double centerX,
@@ -28,11 +31,13 @@ public class TextImageDTO extends FigureDTO {
         this.initY = initY;
     }
 
+    // Getters:
 
     public String getText() { return text; }
     public double getInitX() { return initX; }
     public double getInitY() { return initY; }
 
+    // Setters:
 
     public void setText(String text) { this.text = text; }
     public void setInitX(double initX) { this.initX = initX; }

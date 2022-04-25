@@ -6,21 +6,30 @@ import java.nio.file.Path;
 
 @SuppressWarnings({"unused"})
 public class MenuBar extends JMenuBar {
+    // Constants:
+
     private static MenuBar instance = null;
+
+    // Data members:
 
     private StateFormat format;     // Selected format of state files
     private File currentDir;        // Current directory for FileChooser
     private File imageFile;         // Selected image
     private String imagedText;      // Selected text
-    private boolean isMove;         // Is all objects are moving in main panel?
+    private boolean isMove;         // Is all objects are moving in main panel
 
+    // Inner classes and enums:
 
+    /**
+     * Enumeration of valid state file formats
+     */
     public enum StateFormat {
         JSON,
         XML,
         BIN
     }
 
+    // Constructors:
 
     private MenuBar() {
         format = StateFormat.JSON;
@@ -33,24 +42,23 @@ public class MenuBar extends JMenuBar {
         JMenu settingsMenu = new JMenu("Настройки");
         JMenu helpMenu = new JMenu("Помощь");
 
-        JMenuItem imageChooserItem = new JMenuItem("Выбрать изображение");
-        JMenuItem textChooserItem = new JMenuItem("Выбрать отображаемый текст");
         JMenuItem saveItem = new JMenuItem("Сохранить текущее состояние");
         JMenuItem restoreItem = new JMenuItem("Восстановить состояние");
-        JMenuItem formatItem = new JMenuItem("Формат сохранения состояния");
+        JMenuItem imageChooserItem = new JMenuItem("Выбрать изображение");
+        JMenuItem textChooserItem = new JMenuItem("Выбрать отображаемый текст");
+        JMenuItem formatItem = new JMenuItem("Формат файла состояния");
 
-        imageChooserItem.addMouseListener(new ImageChooserItemMouseListener());
-        imageChooserItem.getAccessibleContext().setAccessibleDescription("Hello!");
-        textChooserItem.addMouseListener(new TextChooserItemMouseListener());
         saveItem.addMouseListener(new SaveItemMouseListener());
         restoreItem.addMouseListener(new RestoreItemMouseListener());
+        imageChooserItem.addMouseListener(new ImageChooserItemMouseListener());
+        textChooserItem.addMouseListener(new TextChooserItemMouseListener());
         helpMenu.addMouseListener(new HelpMenuMouseListener());
         formatItem.addMouseListener(new FormatChooserItemMouseListener());
 
-        mainMenu.add(imageChooserItem);
-        mainMenu.add(textChooserItem);
         mainMenu.add(saveItem);
         mainMenu.add(restoreItem);
+        settingsMenu.add(imageChooserItem);
+        settingsMenu.add(textChooserItem);
         settingsMenu.add(formatItem);
 
         add(mainMenu);
@@ -65,12 +73,15 @@ public class MenuBar extends JMenuBar {
         return instance;
     }
 
+    // Getters:
 
     public StateFormat getFormat() { return format; }
     public File getCurrentDir() { return currentDir; }
     public File getImageFile() { return imageFile; }
     public String getImagedText() { return imagedText; }
     public boolean isMove() { return isMove; }
+
+    // Setters:
 
     public void setFormat(StateFormat format) { this.format = format; }
     public void setCurrentDir(File currentDir) { this.currentDir = currentDir; }

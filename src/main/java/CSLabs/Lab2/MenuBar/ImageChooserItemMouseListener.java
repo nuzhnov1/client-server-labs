@@ -57,7 +57,7 @@ class ImageChooserItemMouseListener implements MouseListener {
                     mainFrame,
             """
                     Выбор изображение для отображения при щелчке левой кнопкой мыши.
-                    Доступные форматы изображения: jpg, png, gif, bmp.
+                    Доступные форматы изображения: jpg, jpeg, png, gif, bmp.
                     """,
                     "Помощь",
                     JOptionPane.INFORMATION_MESSAGE

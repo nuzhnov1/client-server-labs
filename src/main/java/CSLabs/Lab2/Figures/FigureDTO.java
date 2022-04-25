@@ -8,19 +8,19 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import java.io.Serializable;
 
 @SuppressWarnings("unused")
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        property = "figure"
-)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "figure")
 @JsonSubTypes({
     @Type(value = LoadedImageDTO.class, name = "image"),
     @Type(value = TextImageDTO.class, name = "text")
 })
 public class FigureDTO implements Serializable {
+    // Data members:
+
     private double centerX, centerY;
     private double velocityX, velocityY;
     private boolean isMove;
 
+    // Constructors:
 
     public FigureDTO(
             @JsonProperty(value = "centerX") double centerX,
@@ -36,6 +36,7 @@ public class FigureDTO implements Serializable {
         this.isMove = isMove;
     }
 
+    // Getters:
 
     public double getCenterX() { return centerX; }
     public double getCenterY() { return centerY; }
@@ -43,6 +44,7 @@ public class FigureDTO implements Serializable {
     public double getVelocityY() { return velocityY; }
     public boolean isMove() { return isMove; }
 
+    // Setters:
 
     public void setCenterX(double centerX) { this.centerX = centerX; }
     public void setCenterY(double centerY) { this.centerY = centerY; }

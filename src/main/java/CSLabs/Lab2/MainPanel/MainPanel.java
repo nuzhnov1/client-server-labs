@@ -12,10 +12,15 @@ import java.io.File;
 
 @SuppressWarnings({"unused", "DuplicatedCode"})
 public class MainPanel extends JPanel {
+    // Constants:
+
     private static MainPanel instance = null;
+
+    // Data members:
 
     private final Controller controller;
 
+    // Constructors:
 
     private MainPanel() {
         controller = new Controller(this);

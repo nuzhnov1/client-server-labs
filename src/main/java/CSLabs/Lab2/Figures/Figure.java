@@ -5,17 +5,23 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-@SuppressWarnings({"unused", "DuplicatedCode", "FieldCanBeLocal"})
+@SuppressWarnings({"unused", "DuplicatedCode"})
 public abstract class Figure extends JComponent implements MouseListener, IMovable
 {
-    protected static final double BOUNCE = -1.0;
-    protected static final double MAX_SPEED = 100.0;
+    // Constants:
+    
+    protected static final double BOUNCE = -1.0;        // Rebound ratio
+    protected static final double MAX_SPEED = 100.0;    // Absolute maximum speed
 
+    // Data members:
+    
     protected double centerX, centerY;
     protected int width, height;
     protected double velocityX, velocityY;
     protected boolean isMove;
 
+
+    // Constructors:
 
     public Figure() {
         isMove = true;
@@ -25,13 +31,28 @@ public abstract class Figure extends JComponent implements MouseListener, IMovab
         addMouseListener(this);
     }
 
+    // Getters:
 
     public double getCenterX() { return centerX; }
     public double getCenterY() { return centerY; }
     public double getVelocityX() { return velocityX; }
     public double getVelocityY() { return velocityY; }
+
+    // Is-getters:
+
     public boolean isMove() { return isMove; }
 
+    /**
+     * Checks whether a point belongs to a given shape
+     */
+    public boolean isBelongs(int x, int y) {
+        int x1 = getX(), y1 = getY();
+        int x2 = x1 + getWidth(), y2 = y1 + getHeight();
+
+        return ((x >= x1 && x <= x2) && (y >= y1 && y <= y2));
+    }
+
+    // Setters:
 
     public void setCenterX(double centerX) {
         this.centerX = centerX;
@@ -63,13 +84,12 @@ public abstract class Figure extends JComponent implements MouseListener, IMovab
     public void setMove(boolean isMove) { this.isMove = isMove; }
 
 
-    public boolean isBelongs(int x, int y) {
-        int x1 = getX(), y1 = getY();
-        int x2 = x1 + getWidth(), y2 = y1 + getHeight();
+    // Other methods:
 
-        return ((x >= x1 && x <= x2) && (y >= y1 && y <= y2));
-    }
-
+    /**
+     * Checks whether the figure has collided with any wall of the panel
+     * and changes its coordinates in case of a collision
+     */
     protected void checkWalls() {
         Container parent = getParent();
 
@@ -105,6 +125,7 @@ public abstract class Figure extends JComponent implements MouseListener, IMovab
         }
     }
 
+    // MouseListener methods implementation:
 
     @Override
     public void mousePressed(MouseEvent mouseEvent) {

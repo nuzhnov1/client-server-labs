@@ -15,17 +15,18 @@ class TextChooserItemMouseListener implements MouseListener {
         if (SwingUtilities.isLeftMouseButton(e)) {
             String selectedText = JOptionPane.showInputDialog(
                     mainFrame,
-                    "Отображаемый текст:",
-                    "Введите отображаемый текст",
+                    "Введите отображаемый текст:",
+                    "Выбор отображаемого текста",
                     JOptionPane.INFORMATION_MESSAGE
             );
 
-            menuBar.setImagedText(selectedText);
+            if (selectedText != null)
+                menuBar.setImagedText(selectedText);
         }
         else if (SwingUtilities.isRightMouseButton(e)) {
             JOptionPane.showMessageDialog(
                     mainFrame,
-                    "Ввод текст для отображения при щелчке правой кнопкой мыши.",
+                    "Выбор текста для отображения при щелчке правой кнопкой мыши.",
                     "Помощь",
                     JOptionPane.INFORMATION_MESSAGE
             );
