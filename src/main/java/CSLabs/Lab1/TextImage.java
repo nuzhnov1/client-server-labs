@@ -3,6 +3,7 @@ package CSLabs.Lab1;
 import java.awt.*;
 
 public class TextImage extends AbstractFigure {
+    @SuppressWarnings("FieldCanBeLocal")
     private final int RADIUS = 10;
 
     private final String text;

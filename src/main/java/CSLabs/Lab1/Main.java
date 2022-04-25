@@ -7,7 +7,7 @@ public class Main extends JFrame {
     public static final int FPS = 60;
 
     public Main() {
-        setTitle("Лабораторная работа №2. Нужнов А.Н., Рымарь Р.А.");
+        setTitle("Лабораторная работа №1. Нужнов А.Н., Рымарь Р.А.");
         setSize(1024, 768);
         setLocation(100, 100);
         setResizable(true);
