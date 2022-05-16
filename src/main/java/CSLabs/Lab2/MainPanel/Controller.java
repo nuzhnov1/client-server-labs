@@ -3,18 +3,11 @@ package CSLabs.Lab2.MainPanel;
 import CSLabs.Lab2.Figures.*;
 import CSLabs.Lab2.Main;
 import CSLabs.Lab2.MenuBar.MenuBar;
-import CSLabs.Lab2.MenuBar.MenuBar.StateFormat;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import CSLabs.Lab2.MenuBar.StateFormat;
 import org.apache.commons.io.FilenameUtils;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,6 +22,7 @@ public class Controller {
     // Data members:
 
     private final MainPanel mainPanel;
+    private final ControllerIO controllerIO;
     private final FiguresMapper figuresMapper;
     private final HashMap<String, ImageIcon> imageMap;
     private final HashSet<File> imageFilesSet;
@@ -37,6 +31,7 @@ public class Controller {
 
     Controller(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
+        controllerIO = new ControllerIO();
         figuresMapper = new FiguresMapper();
         imageMap = new HashMap<String, ImageIcon>();
         imageFilesSet = new HashSet<File>();
@@ -111,13 +106,13 @@ public class Controller {
             FiguresDTOList figuresDTO = figuresMapper.ToDTO(figures);
 
             zipStream.putNextEntry(stateFile);
-            writeStateToStream(zipStream, format, figuresDTO);
+            controllerIO.writeStateToStream(zipStream, format, figuresDTO);
             zipStream.flush();
             zipStream.closeEntry();
 
             for (String imageName : imageMap.keySet()) {
                 ImageIcon image = imageMap.get(imageName);
-                writeImageToStream(zipStream, imageName, image);
+                controllerIO.writeImageToStream(zipStream, imageName, image);
             }
         }
     }
@@ -136,10 +131,10 @@ public class Controller {
                 String filename = entry.getName();
                 String extension = FilenameUtils.getExtension(filename);
 
-                if (isStateFile(extension))
-                    figuresDTO = readStateFromStream(zipStream, parseFormat(extension));
+                if (StateFormat.isFormat(extension))
+                    figuresDTO = controllerIO.readStateFromStream(zipStream, StateFormat.parse(extension));
                 else {
-                    ImageIcon image = readImageFromStream(zipStream, filename);
+                    ImageIcon image = controllerIO.readImageFromStream(zipStream, filename);
                     imageMap.put(filename, image);
                 }
 
@@ -184,118 +179,10 @@ public class Controller {
         mainPanel.removeAll();
     }
 
-    // Auxiliary methods:
-
-    private List<? extends Figure> getFigures() {
+    public List<? extends Figure> getFigures() {
         return Arrays.stream(mainPanel.getComponents())
                 .filter(c -> c instanceof Figure)
                 .map(c -> (Figure) c)
                 .toList();
-    }
-
-    private void writeStateToStream(ZipOutputStream zipStream, StateFormat format,
-                                    FiguresDTOList figuresDTO)
-            throws IllegalArgumentException, IOException
-    {
-        try {
-            if (format != StateFormat.BIN) {
-                ObjectMapper mapper = switch (format) {
-                    case JSON -> new JsonMapper();
-                    case XML -> new XmlMapper();
-                    default -> throw new IllegalArgumentException("недопустимый формат данных файла состояния");
-                };
-
-                mapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
-                mapper.writeValue(zipStream, figuresDTO);
-            }
-            else {
-                ObjectOutputStream oos = new ObjectOutputStream(zipStream);
-                oos.writeObject(figuresDTO);
-            }
-        }
-        catch (IOException ignored) {
-            throw new IOException("не удалось записать данные в файл состояния");
-        }
-    }
-
-    private void writeImageToStream(ZipOutputStream zipStream, String imageName, ImageIcon image) throws IOException
-    {
-        try {
-            ZipEntry imageFile = new ZipEntry(imageName);
-            zipStream.putNextEntry(imageFile);
-
-            String extension = FilenameUtils.getExtension(imageName);
-            BufferedImage bufferedImage = new BufferedImage(
-                    image.getIconWidth(), image.getIconHeight(),
-                    BufferedImage.TYPE_INT_ARGB
-            );
-            Graphics2D graphics2D = bufferedImage.createGraphics();
-
-            graphics2D.drawImage(image.getImage(), 0, 0, null);
-            graphics2D.dispose();
-            ImageIO.write(bufferedImage, extension, zipStream);
-
-            zipStream.flush();
-            zipStream.closeEntry();
-        }
-        catch (IOException error) {
-            throw new IOException(String.format("не удалось добавить в архив изображение \"%s\"", imageName));
-        }
-    }
-
-    private FiguresDTOList readStateFromStream(ZipInputStream zipStream, StateFormat format)
-            throws IOException, IllegalArgumentException
-    {
-        try {
-            if (format != StateFormat.BIN) {
-                ObjectMapper mapper = switch (format) {
-                    case JSON -> new JsonMapper();
-                    case XML -> new XmlMapper();
-                    default -> throw new IllegalArgumentException("недопустимый формат данных файла состояния");
-                };
-
-                mapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
-                return mapper.readValue(zipStream, FiguresDTOList.class);
-            }
-            else {
-                ObjectInputStream ois = new ObjectInputStream(zipStream);
-                return (FiguresDTOList) ois.readObject();
-            }
-        }
-        catch (IOException | ClassNotFoundException ignored) {
-            throw new IOException("не удалось восстановить данные из файла состояния");
-        }
-    }
-
-    private ImageIcon readImageFromStream(ZipInputStream zipStream, String imageName) throws IOException {
-        try {
-            BufferedImage bufferedImage = ImageIO.read(zipStream);
-            ImageIcon image = new ImageIcon();
-
-            image.setImage(bufferedImage.getScaledInstance(
-                    bufferedImage.getWidth(),
-                    bufferedImage.getHeight(),
-                    BufferedImage.TYPE_INT_ARGB
-            ));
-
-            return image;
-        }
-        catch (IOException ignored) {
-            throw new IOException(String.format("не удалось извлечь из архива изображение \"%s\"", imageName));
-        }
-    }
-
-    private StateFormat parseFormat(String extension) throws IllegalArgumentException {
-        try {
-            return StateFormat.valueOf(extension.toUpperCase());
-        }
-        catch (IllegalArgumentException ignored) {
-            throw new IllegalArgumentException("недопустимый формат данных файла состояния");
-        }
-    }
-
-    private boolean isStateFile(String extension) {
-        try { parseFormat(extension); return true; }
-        catch (IllegalArgumentException ignored) { return false; }
     }
 }

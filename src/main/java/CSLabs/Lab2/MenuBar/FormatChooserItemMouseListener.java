@@ -1,7 +1,6 @@
 package CSLabs.Lab2.MenuBar;
 
 import CSLabs.Lab2.Main;
-import CSLabs.Lab2.MenuBar.MenuBar.StateFormat;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;

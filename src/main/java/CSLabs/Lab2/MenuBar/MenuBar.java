@@ -20,15 +20,6 @@ public class MenuBar extends JMenuBar {
 
     // Inner classes and enums:
 
-    /**
-     * Enumeration of valid state file formats
-     */
-    public enum StateFormat {
-        JSON,
-        XML,
-        BIN
-    }
-
     // Constructors:
 
     private MenuBar() {
