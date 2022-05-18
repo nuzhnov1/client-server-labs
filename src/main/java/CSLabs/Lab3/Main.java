@@ -10,6 +10,9 @@ public class Main extends JFrame {
     // Constants:
 
     public static final int FPS = 60;
+
+    // Static members:
+
     private static Main instance = null;
 
     // Data members:
@@ -19,7 +22,7 @@ public class Main extends JFrame {
     // Constructors:
 
     private Main() {
-        setTitle("Лабораторная работа №2. Нужнов А.Н., Рымарь Р.А.");
+        setTitle("Лабораторная работа №3. Нужнов А.Н., Рымарь Р.А.");
         setSize(1024, 768);
         setLocation(100, 100);
         setResizable(true);

@@ -24,12 +24,6 @@ public class TextImage extends Figure {
         setCenter(initX, initY);
     }
 
-    // Getters:
-
-    public String getText() { return text; }
-    public double getInitX() { return initX; }
-    public double getInitY() { return initY; }
-
     // Other methods:
 
     private void checkArea() {
@@ -68,4 +62,10 @@ public class TextImage extends Figure {
         checkArea();
         checkWalls();
     }
+
+    // Getters:
+
+    public String getText() { return text; }
+    public double getInitX() { return initX; }
+    public double getInitY() { return initY; }
 }

@@ -49,8 +49,7 @@ public class CloseListener implements MouseListener {
         MenuBar menuBar = MenuBar.getInstance();
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
 
-        bw.write("Close\n");
-        bw.flush();
+        bw.write("Close\n"); bw.flush();
 
         menuBar.sizeRequestItem.setEnabled(false);
         menuBar.getRequestItem.setEnabled(false);

@@ -89,9 +89,7 @@ public class MainPanel extends JPanel {
         return instance;
     }
 
-
-    public Controller getController() { return controller; }
-
+    // Override methods:
 
     @Override
     public void paint(Graphics g) {
@@ -105,4 +103,8 @@ public class MainPanel extends JPanel {
         controller.removeFigure((Figure) component);
         super.remove(component);
     }
+
+    // Getters:
+
+    public Controller getController() { return controller; }
 }

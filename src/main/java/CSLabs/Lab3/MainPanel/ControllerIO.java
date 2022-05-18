@@ -1,9 +1,6 @@
 package CSLabs.Lab3.MainPanel;
 
-import CSLabs.Lab3.Figures.Figure;
-import CSLabs.Lab3.Figures.FiguresContainer;
-import CSLabs.Lab3.Figures.FiguresDTOList;
-import CSLabs.Lab3.Figures.FiguresMapper;
+import CSLabs.Lab3.Figures.*;
 import CSLabs.Lab3.MenuBar.StateFormat;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -19,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -82,7 +80,7 @@ class ControllerIO {
             throws IllegalArgumentException, IOException
     {
         try {
-            FiguresDTOList figuresDTO = figuresMapper.ToDTO(figures);
+            FiguresDTOSet figuresDTO = figuresMapper.ToDTO(figures);
 
             if (format != StateFormat.BIN) {
                 ObjectMapper mapper = switch (format) {
@@ -111,8 +109,7 @@ class ControllerIO {
      * @param image image
      * @throws IOException it is thrown when an I/O error occurs
      */
-    private void writeImageToStream(OutputStream stream, String imageName, ImageIcon image) throws IOException
-    {
+    private void writeImageToStream(OutputStream stream, String imageName, ImageIcon image) throws IOException {
         try {
             String extension = FilenameUtils.getExtension(imageName);
             BufferedImage bufferedImage = new BufferedImage(
@@ -151,8 +148,8 @@ class ControllerIO {
                 if (StateFormat.isFormat(extension)) {
                     figures.addAll(readFiguresWithoutImagesFromStream(
                             zipStream,
-                            imageMap, StateFormat.parse(extension))
-                    );
+                            imageMap, StateFormat.parse(extension)
+                    ));
                 }
                 else {
                     ImageIcon image = readImageFromStream(zipStream, filename);
@@ -188,13 +185,13 @@ class ControllerIO {
                 };
 
                 mapper.disable(JsonParser.Feature.AUTO_CLOSE_SOURCE);
-                FiguresDTOList figuresDTO = mapper.readValue(stream, FiguresDTOList.class);
+                FiguresDTOSet figuresDTO = mapper.readValue(stream, FiguresDTOSet.class);
 
                 return figuresMapper.toFiguresList(figuresDTO, imageMap);
             }
             else {
                 ObjectInputStream ois = new ObjectInputStream(stream);
-                FiguresDTOList figuresDTO = (FiguresDTOList) ois.readObject();
+                FiguresDTOSet figuresDTO = (FiguresDTOSet) ois.readObject();
 
                 return figuresMapper.toFiguresList(figuresDTO, imageMap);
             }

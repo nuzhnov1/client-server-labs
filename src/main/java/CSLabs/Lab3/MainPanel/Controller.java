@@ -15,6 +15,10 @@ import java.util.UUID;
 
 @SuppressWarnings({"DuplicatedCode"})
 public class Controller {
+    // Constants:
+
+    private static final int DATA_LENGTH = 8192;
+
     // Data members:
 
     private final MainPanel mainPanel;
@@ -59,11 +63,9 @@ public class Controller {
 
     public int getSize() { return container.getFigures().size(); }
 
-    public void writeFigureToStreamByIndex(InputStream is, OutputStream os, StateFormat format)
-            throws IOException
-    {
-        String tempFilePath = MenuBar.getInstance().getCurrentDir().getAbsolutePath() +
-                File.pathSeparator + UUID.randomUUID() + ".zip";
+    public void writeFigureToNetwork(InputStream is, OutputStream os, StateFormat format) throws IOException {
+        String tempFilePath = MenuBar.getInstance().getCurrentDir()
+                .getAbsolutePath() + File.pathSeparator + UUID.randomUUID() + ".zip";
 
         File tempFile = new File(tempFilePath);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -76,35 +78,26 @@ public class Controller {
             Figure figure = container.getFigures().get(index);
             FiguresContainer tempContainer = new FiguresContainer();
 
-            if (figure instanceof LoadedImage)
-                tempContainer.addLoadedImage((LoadedImage) figure);
-            else
-                tempContainer.addTextImage((TextImage) figure);
-
+            tempContainer.addFigure(figure);
             controllerIO.writeFiguresToZIP(fos, format, tempContainer);
-            fos.flush();
             fos.close();
 
-            bw.write("Ok\n");
-            bw.write(String.format("%d\n", tempFile.length()));
-            bw.flush();
+            bw.write("Ok\n"); bw.flush();
+            bw.write(String.format("%d\n", tempFile.length())); bw.flush();
         }
         catch (Exception ignored) {
-            bw.write("Error\n");
-            bw.flush();
-
+            bw.write("Error\n"); bw.flush();
             return;
         }
 
-        FileInputStream fis = new FileInputStream(tempFilePath);
+        FileInputStream fis = new FileInputStream(tempFile);
         BufferedInputStream bis = new BufferedInputStream(fis);
         BufferedOutputStream bos = new BufferedOutputStream(os);
-        byte[] bytes = new byte[8192];
+        byte[] bytes = new byte[DATA_LENGTH];
         int readBytes;
 
         while ((readBytes = bis.read(bytes)) != -1) {
-            bos.write(bytes, 0, readBytes);
-            bos.flush();
+            bos.write(bytes, 0, readBytes); bos.flush();
         }
 
         bis.close();
@@ -112,8 +105,8 @@ public class Controller {
     }
 
     public void readFigureFromStream(InputStream is, OutputStream os, int index) throws IOException {
-        String tempFilePath = MenuBar.getInstance().getCurrentDir().getAbsolutePath() +
-                File.pathSeparator + UUID.randomUUID() + ".zip";
+        String tempFilePath = MenuBar.getInstance()
+                .getCurrentDir().getAbsolutePath() + File.pathSeparator + UUID.randomUUID() + ".zip";
 
         File tempFile = new File(tempFilePath);
         FileOutputStream fos = new FileOutputStream(tempFile);
@@ -121,29 +114,25 @@ public class Controller {
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-        byte[] bytes = new byte[8192];
+        byte[] bytes = new byte[DATA_LENGTH];
         int totalReadBytes = 0;
         int readBytes;
 
-        bw.write(String.format("%d\n", index));
-        bw.flush();
+        bw.write(String.format("%d\n", index)); bw.flush();
 
         String status = br.readLine();
-
         if (!status.equals("Ok"))
             throw new IOException("Ошибка при получении объекта");
 
-        long size = Long.parseLong(br.readLine());
-
+        int size = Integer.parseInt(br.readLine());
         while (totalReadBytes < size) {
-            readBytes = bis.read(bytes);
+            readBytes = bis.read(bytes, 0, Math.min(DATA_LENGTH, size));
 
-            if (readBytes == -1)
+            if ((readBytes == -1))
                 throw new IOException("Ошибка при получении объекта");
 
             totalReadBytes += readBytes;
-            bos.write(bytes, 0, readBytes);
-            bos.flush();
+            bos.write(bytes, 0, readBytes); bos.flush();
         }
 
         bos.close();
@@ -151,8 +140,16 @@ public class Controller {
         FileInputStream inputStream = new FileInputStream(tempFile);
         FiguresContainer resultContainer = controllerIO.readFiguresFromZIP(inputStream);
         inputStream.close();
+        tempFile.delete();
 
         addFiguresFromContainer(resultContainer);
+    }
+
+    private void addFigure(Figure figure) {
+        if (figure instanceof LoadedImage)
+            addImage((LoadedImage) figure);
+        else
+            addImagedText((TextImage) figure);
     }
 
     private void addImage(LoadedImage loadedImage) {
@@ -179,17 +176,10 @@ public class Controller {
     }
 
     public void addFiguresFromContainer(FiguresContainer container) {
-        container.getFigures().forEach((figure -> {
-            if (figure instanceof LoadedImage)
-                addImage((LoadedImage) figure);
-            else
-                addImagedText((TextImage) figure);
-        }));
+        container.getFigures().forEach(this::addFigure);
     }
 
-    public void removeFigure(Figure figure) {
-        container.remove(figure);
-    }
+    public void removeFigure(Figure figure) { container.remove(figure); }
 
     public void removeAllFigures() {
         container.clear();

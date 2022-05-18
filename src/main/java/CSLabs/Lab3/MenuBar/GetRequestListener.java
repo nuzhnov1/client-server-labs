@@ -1,13 +1,15 @@
 package CSLabs.Lab3.MenuBar;
 
-import CSLabs.Lab3.Figures.FiguresContainer;
 import CSLabs.Lab3.Main;
 import CSLabs.Lab3.MainPanel.MainPanel;
 
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 public class GetRequestListener implements MouseListener {
     private static int itemIndex = 0;
@@ -77,8 +79,7 @@ public class GetRequestListener implements MouseListener {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
 
         try {
-            bw.write("GetFigure\n");
-            bw.flush();
+            bw.write("GetFigure\n"); bw.flush();
             controller.readFigureFromStream(is, os, itemIndex);
         }
         catch (Exception error) {

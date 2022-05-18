@@ -22,11 +22,11 @@ public class MenuBar extends JMenuBar {
     File imageFile = new File("src/main/resources/images/Nut.png");
     String imagedText = "Справедливо";
 
-    JMenuItem connectionItem;
-    JMenuItem sizeRequestItem;
-    JMenuItem getRequestItem;
-    JMenuItem clearItem;
-    JMenuItem closeItem;
+    JMenuItem connectionItem = new JMenuItem("Подключиться к серверу");
+    JMenuItem sizeRequestItem = new JMenuItem("Получить размер вектора объектов");
+    JMenuItem getRequestItem = new JMenuItem("Получить объект по номеру");
+    JMenuItem clearItem = new JMenuItem("Очистить вектор объектов");
+    JMenuItem closeItem = new JMenuItem("Закрыть соединение");
 
     // Constructors:
 
@@ -42,11 +42,6 @@ public class MenuBar extends JMenuBar {
         JMenuItem imageChooserItem = new JMenuItem("Выбрать изображение");
         JMenuItem textChooserItem = new JMenuItem("Выбрать отображаемый текст");
         JMenuItem formatItem = new JMenuItem("Формат файла состояния");
-        connectionItem = new JMenuItem("Подключиться к серверу");
-        sizeRequestItem = new JMenuItem("Получить размер вектора объектов");
-        getRequestItem = new JMenuItem("Получить объект по номеру");
-        clearItem = new JMenuItem("Очистить вектор объектов");
-        closeItem = new JMenuItem("Закрыть соединение");
 
         saveItem.addMouseListener(new SaveItemMouseListener());
         restoreItem.addMouseListener(new RestoreItemMouseListener());

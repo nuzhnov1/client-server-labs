@@ -76,7 +76,7 @@ public class Controller {
                     bw.flush();
                     break;
                 case "GetFigure": {
-                    controller.writeFigureToStreamByIndex(is, os, menuBar.format);
+                    controller.writeFigureToNetwork(is, os, menuBar.format);
                     break;
                 }
                 case "Clear": {

@@ -39,6 +39,12 @@ public class FiguresContainer {
     }
 
     // Main methods:
+    public void addFigure(Figure figure) {
+        if (figure instanceof LoadedImage)
+            addLoadedImage((LoadedImage) figure);
+        else
+            addTextImage((TextImage) figure);
+    }
 
     public void addLoadedImage(LoadedImage loadedImage) {
         if (!imageMap.containsKey(loadedImage.getImageName()))
@@ -49,7 +55,21 @@ public class FiguresContainer {
 
     public void addTextImage(TextImage textImage) { figures.add(textImage); }
 
-    public void remove(Figure figure) { figures.remove(figure); }
+    public void remove(Figure figure) {
+        figures.remove(figure);
+
+        if (figure instanceof LoadedImage) {
+            LoadedImage loadedImage = (LoadedImage) figure;
+            long count = figures.stream()
+                    .filter(figure_p -> figure_p instanceof LoadedImage)
+                    .map(image -> (LoadedImage) image)
+                    .filter(image -> image.getImageName().equals(loadedImage.getImageName()))
+                    .count();
+
+            if (count == 0)
+                imageMap.remove(loadedImage.getImageName());
+        }
+    }
 
     public void clear() {
         figures.clear();

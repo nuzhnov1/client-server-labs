@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.*;
-import java.util.Set;
 
 @SuppressWarnings({"unused", "DuplicatedCode"})
 public class TCPServer {
@@ -188,10 +187,7 @@ public class TCPServer {
     public InetAddress getInetAddress() { return serverSocket.getInetAddress(); }
     public String getHostName() { return serverSocket.getInetAddress().getHostName(); }
     public int getPort() { return serverSocket.getLocalPort(); }
-    public int getReceiveBufferSize() throws SocketException { return serverSocket.getReceiveBufferSize(); }
     public boolean isAddressReuse() throws SocketException { return serverSocket.getReuseAddress(); }
-    public <T> T getOption(SocketOption<T> name) throws IOException { return serverSocket.getOption(name); }
-    public Set<SocketOption<?>> supportedOptions() { return serverSocket.supportedOptions(); }
 
     public String getThreadsGroupName() { return threadGroup.getName(); }
     public int getActiveConnections() { return threadGroup.activeCount(); }
@@ -232,9 +228,6 @@ public class TCPServer {
             status = ServerStatus.SUSPEND;
     }
 
-    public void setReceiveBufferSize(int bufferSize) throws SocketException {
-        serverSocket.setReceiveBufferSize(bufferSize);
-    }
     public void setReuseAddress(boolean isReuseAddress) throws SocketException {
         serverSocket.setReuseAddress(isReuseAddress);
     }

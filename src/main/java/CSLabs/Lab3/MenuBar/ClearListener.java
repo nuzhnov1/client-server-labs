@@ -50,8 +50,7 @@ public class ClearListener implements MouseListener {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
 
-        bw.write("Clear\n");
-        bw.flush();
+        bw.write("Clear\n"); bw.flush();
         String status = br.readLine();
 
         if (status.equals("Ok")) {

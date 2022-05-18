@@ -18,6 +18,10 @@ public class TCPClient {
 
     // Constructors:
 
+    TCPClient(Socket socket) {
+        clientSocket = socket;
+    }
+
     public TCPClient() throws IOException {
         clientSocket = new Socket();
         clientSocket.setOption(StandardSocketOptions.SO_KEEPALIVE, true);

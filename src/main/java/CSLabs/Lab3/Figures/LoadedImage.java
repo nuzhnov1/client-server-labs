@@ -34,11 +34,6 @@ public class LoadedImage extends Figure {
         velocityY = Utilities.randomRange(-MAX_SPEED, MAX_SPEED);
     }
 
-    // Getters:
-
-    public String getImageName() { return imageName; }
-    public ImageIcon getImage() { return image; }
-
     // Overridden methods:
 
     @Override
@@ -54,4 +49,9 @@ public class LoadedImage extends Figure {
         checkWalls();
         setCenter(centerX + time * velocityX, centerY + time * velocityY);
     }
+
+    // Getters:
+
+    public String getImageName() { return imageName; }
+    public ImageIcon getImage() { return image; }
 }
