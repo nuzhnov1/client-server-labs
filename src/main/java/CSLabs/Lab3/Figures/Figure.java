@@ -18,14 +18,12 @@ public abstract class Figure extends JComponent implements MouseListener, IMovab
     protected double centerX, centerY;
     protected int width, height;
     protected double velocityX, velocityY;
-    protected boolean isMove;
+    protected boolean isMove = true;
 
 
     // Constructors:
 
     public Figure() {
-        isMove = true;
-
         setVisible(true);
         setEnabled(true);
         addMouseListener(this);

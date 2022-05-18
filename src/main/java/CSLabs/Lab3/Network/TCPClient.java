@@ -14,51 +14,43 @@ public class TCPClient {
 
     // Data members:
 
-    private final IWorker worker;
     private final Socket clientSocket;
-    private InetSocketAddress socketAddress;
 
     // Constructors:
 
-    private TCPClient(IWorker clientWorker) throws IOException {
-        worker = clientWorker;
+    public TCPClient() throws IOException {
         clientSocket = new Socket();
-
         clientSocket.setOption(StandardSocketOptions.SO_KEEPALIVE, true);
-    }
-
-    public TCPClient(IWorker clientWorker, InetAddress address, int port) throws IOException {
-        this(clientWorker);
-        socketAddress = new InetSocketAddress(address, port);
-    }
-
-    public TCPClient(IWorker clientWorker, String hostname, int port) throws IOException {
-        this(clientWorker);
-        socketAddress = new InetSocketAddress(hostname, port);
     }
 
     // Main methods:
 
-    public void start() throws IOException {
-        try {
-            clientSocket.connect(socketAddress);
+    public void connect(InetAddress address, int port) throws IOException {
+        InetSocketAddress socketAddress = new InetSocketAddress(address, port);
+        clientSocket.connect(socketAddress);
+    }
 
+    public void work(IWorker worker) throws IOException {
+        try {
             InputStream socketIS = clientSocket.getInputStream();
             OutputStream socketOS = clientSocket.getOutputStream();
 
             worker.run(socketIS, socketOS);
         }
         catch (InterruptedException ignored) {}
-        finally {
+    }
+
+    public void close() {
+        try {
             clientSocket.shutdownInput();
             clientSocket.shutdownOutput();
             clientSocket.close();
         }
+        catch (IOException ignored) {}
     }
 
     // Getters:
 
-    public IWorker getWorker() { return worker; }
     public boolean isConnect() { return clientSocket.isConnected() && !clientSocket.isClosed();}
 
     public InetAddress getInetAddress() { return clientSocket.getInetAddress(); }
@@ -80,8 +72,5 @@ public class TCPClient {
     }
     public void setPerformance(int connectionTime, int latency, int bandwidth) {
         clientSocket.setPerformancePreferences(connectionTime, latency, bandwidth);
-    }
-    public <T> void setOption(SocketOption<T> name, T value) throws IOException {
-        clientSocket.setOption(name, value);
     }
 }

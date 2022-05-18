@@ -1,5 +1,6 @@
 package CSLabs.Lab3.MainPanel;
 
+import CSLabs.Lab3.Figures.Figure;
 import CSLabs.Lab3.MenuBar.MenuBar;
 
 import javax.swing.*;
@@ -18,13 +19,11 @@ public class MainPanel extends JPanel {
 
     // Data members:
 
-    private final Controller controller;
+    private final Controller controller = new Controller(this);
 
     // Constructors:
 
     private MainPanel() {
-        controller = new Controller(this);
-
         setBackground(new Color(0, 128, 128));
         setBorder(BorderFactory.createLineBorder(new Color(128, 0, 128), 3, true));
         setEnabled(true);
@@ -63,15 +62,14 @@ public class MainPanel extends JPanel {
         addKeyListener(new KeyListener() {
             @Override
             public void keyReleased(KeyEvent e) {
-                MenuBar menuBar = MenuBar.getInstance();
-                boolean isMove = menuBar.isMove();
+                boolean isMove = controller.isMove();
 
                 if (e.getKeyCode() == KeyEvent.VK_S)
-                    menuBar.setMove(!isMove);
+                    controller.setMove(!isMove);
 
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                     controller.removeAllFigures();
-                    menuBar.setMove(true);
+                    controller.setMove(true);
                 }
             }
 
@@ -81,12 +79,7 @@ public class MainPanel extends JPanel {
             public void keyPressed(KeyEvent e) {}
         });
 
-        Thread moveController = new Thread(() -> {
-            try { controller.moveControl(); }
-            catch (InterruptedException ignored) {}
-        });
-
-        moveController.start();
+        controller.startMoveControl();
     }
 
     public static MainPanel getInstance() {
@@ -105,5 +98,11 @@ public class MainPanel extends JPanel {
         super.paint(g);
         for (var component : getComponents())
             component.paint(g);
+    }
+
+    @Override
+    public void remove(Component component) {
+        controller.removeFigure((Figure) component);
+        super.remove(component);
     }
 }

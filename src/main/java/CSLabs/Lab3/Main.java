@@ -12,6 +12,10 @@ public class Main extends JFrame {
     public static final int FPS = 60;
     private static Main instance = null;
 
+    // Data members:
+
+    private static String[] s_args;
+
     // Constructors:
 
     private Main() {
@@ -36,8 +40,14 @@ public class Main extends JFrame {
         return instance;
     }
 
+    // Getters:
+
+    public static String[] getArgs() { return s_args;}
+
+    // Entry point:
 
     public static void main(String[] args) throws InterruptedException {
+        s_args = args;
         Main main = getInstance();
 
         while (main.isShowing()) {

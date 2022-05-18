@@ -18,7 +18,7 @@ class RestoreItemMouseListener implements MouseListener {
         MenuBar menuBar = MenuBar.getInstance();
 
         if (SwingUtilities.isLeftMouseButton(e)) {
-            JFileChooser fileChooser = new JFileChooser(menuBar.getCurrentDir());
+            JFileChooser fileChooser = new JFileChooser(menuBar.currentDir);
 
             fileChooser.setDialogTitle("Выбор zip-архива для восстановления состояния");
             fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
@@ -31,9 +31,8 @@ class RestoreItemMouseListener implements MouseListener {
                 MainPanel mainPanel = MainPanel.getInstance();
                 Controller panelController = mainPanel.getController();
                 File selectedFile = fileChooser.getSelectedFile();
-                File selectedDir = selectedFile.getParentFile();
 
-                menuBar.setCurrentDir(selectedDir);
+                menuBar.currentDir = selectedFile.getParentFile();
 
                 try {
                     panelController.restoreStateFromFile(selectedFile);
@@ -51,8 +50,7 @@ class RestoreItemMouseListener implements MouseListener {
                 File selectedFile = fileChooser.getSelectedFile();
 
                 if (selectedFile != null) {
-                    File selectedDir = selectedFile.getParentFile();
-                    menuBar.setCurrentDir(selectedDir);
+                    menuBar.currentDir = selectedFile.getParentFile();
                 }
             }
             else {

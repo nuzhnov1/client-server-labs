@@ -21,11 +21,11 @@ class FormatChooserItemMouseListener implements MouseListener {
                     JOptionPane.INFORMATION_MESSAGE,
                     null,
                     StateFormat.values(),
-                    menuBar.getFormat()
+                    menuBar.format
             );
 
             if (selectedFormat != null)
-                menuBar.setFormat(selectedFormat);
+                menuBar.format = selectedFormat;
         }
         else if (SwingUtilities.isRightMouseButton(e)) {
             JOptionPane.showMessageDialog(

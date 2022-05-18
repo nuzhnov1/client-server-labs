@@ -1,5 +1,7 @@
 package CSLabs.Lab3.MenuBar;
 
+import CSLabs.Lab3.Network.TCPClient;
+
 import javax.swing.*;
 import java.io.File;
 import java.nio.file.Path;
@@ -12,48 +14,80 @@ public class MenuBar extends JMenuBar {
 
     // Data members:
 
-    private StateFormat format;     // Selected format of state files
-    private File currentDir;        // Current directory for FileChooser
-    private File imageFile;         // Selected image
-    private String imagedText;      // Selected text
-    private boolean isMove;         // Is all objects are moving in main panel
+    final Controller controller = new Controller();
+    TCPClient client;
 
-    // Inner classes and enums:
+    StateFormat format = StateFormat.JSON;
+    File currentDir = new File(Path.of("").toAbsolutePath().toString());
+    File imageFile = new File("src/main/resources/images/Nut.png");
+    String imagedText = "Справедливо";
+
+    JMenuItem connectionItem;
+    JMenuItem sizeRequestItem;
+    JMenuItem getRequestItem;
+    JMenuItem clearItem;
+    JMenuItem closeItem;
 
     // Constructors:
 
     private MenuBar() {
-        format = StateFormat.JSON;
-        currentDir = new File(Path.of("").toAbsolutePath().toString());
-        imageFile = new File("src/main/resources/images/Nut.png");
-        imagedText = "Справедливо";
-        isMove = true;
-
         JMenu mainMenu = new JMenu("Меню");
         JMenu settingsMenu = new JMenu("Настройки");
+        JMenu connectionMenu = new JMenu("Подключение к серверу");
         JMenu helpMenu = new JMenu("Помощь");
 
         JMenuItem saveItem = new JMenuItem("Сохранить текущее состояние");
         JMenuItem restoreItem = new JMenuItem("Восстановить состояние");
+        JCheckBox serverActiveItem = new JCheckBox("Работа сервера", false);
         JMenuItem imageChooserItem = new JMenuItem("Выбрать изображение");
         JMenuItem textChooserItem = new JMenuItem("Выбрать отображаемый текст");
         JMenuItem formatItem = new JMenuItem("Формат файла состояния");
+        connectionItem = new JMenuItem("Подключиться к серверу");
+        sizeRequestItem = new JMenuItem("Получить размер вектора объектов");
+        getRequestItem = new JMenuItem("Получить объект по номеру");
+        clearItem = new JMenuItem("Очистить вектор объектов");
+        closeItem = new JMenuItem("Закрыть соединение");
 
         saveItem.addMouseListener(new SaveItemMouseListener());
         restoreItem.addMouseListener(new RestoreItemMouseListener());
+        serverActiveItem.addItemListener(e -> {
+            if (controller.isServerActive())
+                controller.suspendServer();
+            else if (!controller.isServerRun())
+                controller.startServer();
+            else if (!controller.isServerDead())
+                controller.activateServer();
+        });
         imageChooserItem.addMouseListener(new ImageChooserItemMouseListener());
         textChooserItem.addMouseListener(new TextChooserItemMouseListener());
         helpMenu.addMouseListener(new HelpMenuMouseListener());
         formatItem.addMouseListener(new FormatChooserItemMouseListener());
+        connectionItem.addMouseListener(new ConnectionListener());
+        sizeRequestItem.addMouseListener(new SizeRequestListener());
+        getRequestItem.addMouseListener(new GetRequestListener());
+        clearItem.addMouseListener(new ClearListener());
+        closeItem.addMouseListener(new CloseListener());
+
+        sizeRequestItem.setEnabled(false);
+        getRequestItem.setEnabled(false);
+        clearItem.setEnabled(false);
+        closeItem.setEnabled(false);
 
         mainMenu.add(saveItem);
         mainMenu.add(restoreItem);
+        mainMenu.add(serverActiveItem);
         settingsMenu.add(imageChooserItem);
         settingsMenu.add(textChooserItem);
         settingsMenu.add(formatItem);
+        connectionMenu.add(connectionItem);
+        connectionMenu.add(sizeRequestItem);
+        connectionMenu.add(getRequestItem);
+        connectionMenu.add(clearItem);
+        connectionMenu.add(closeItem);
 
         add(mainMenu);
         add(settingsMenu);
+        add(connectionMenu);
         add(helpMenu);
     }
 
@@ -66,17 +100,8 @@ public class MenuBar extends JMenuBar {
 
     // Getters:
 
-    public StateFormat getFormat() { return format; }
-    public File getCurrentDir() { return currentDir; }
     public File getImageFile() { return imageFile; }
+    public File getCurrentDir() { return currentDir; }
     public String getImagedText() { return imagedText; }
-    public boolean isMove() { return isMove; }
-
-    // Setters:
-
-    public void setFormat(StateFormat format) { this.format = format; }
-    public void setCurrentDir(File currentDir) { this.currentDir = currentDir; }
-    public void setImageFile(File imageFile) { this.imageFile = imageFile; }
-    public void setImagedText(String imagedText) { this.imagedText = imagedText; }
-    public void setMove(boolean isMove) { this.isMove = isMove; }
+    public StateFormat getFormat() { return format; }
 }

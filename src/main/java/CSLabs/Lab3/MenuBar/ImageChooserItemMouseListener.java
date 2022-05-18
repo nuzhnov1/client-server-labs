@@ -14,7 +14,7 @@ class ImageChooserItemMouseListener implements MouseListener {
     public void mouseReleased(MouseEvent e) {
         Main mainFrame = Main.getInstance();
         MenuBar menuBar = MenuBar.getInstance();
-        File currentDir = menuBar.getCurrentDir();
+        File currentDir = menuBar.currentDir;
 
         if (SwingUtilities.isLeftMouseButton(e)) {
             JFileChooser fileChooser = new JFileChooser(currentDir);
@@ -31,18 +31,15 @@ class ImageChooserItemMouseListener implements MouseListener {
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
-                File selectedDir = selectedFile.getParentFile();
 
-                menuBar.setCurrentDir(selectedDir);
-                menuBar.setImageFile(selectedFile);
+                menuBar.currentDir = selectedFile.getParentFile();
+                menuBar.imageFile = selectedFile;
             }
             else if (returnVal == JFileChooser.CANCEL_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
 
-                if (selectedFile != null) {
-                    File selectedDir = selectedFile.getParentFile();
-                    menuBar.setCurrentDir(selectedDir);
-                }
+                if (selectedFile != null)
+                    menuBar.currentDir = selectedFile.getParentFile();
             }
             else {
                 JOptionPane.showMessageDialog(

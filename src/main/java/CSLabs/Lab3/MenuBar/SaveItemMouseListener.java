@@ -19,7 +19,7 @@ class SaveItemMouseListener implements MouseListener {
         MenuBar menuBar = MenuBar.getInstance();
 
         if (SwingUtilities.isLeftMouseButton(e)) {
-            JFileChooser fileChooser = new JFileChooser(menuBar.getCurrentDir());
+            JFileChooser fileChooser = new JFileChooser(menuBar.currentDir);
 
             fileChooser.setDialogTitle("Сохранение состояния в zip-архив");
             fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -46,7 +46,7 @@ class SaveItemMouseListener implements MouseListener {
                     selectedFile = new File(pathToFileWithExtension);
                 }
 
-                menuBar.setCurrentDir(selectedDir);
+                menuBar.currentDir = selectedDir;
 
                 try {
                     panelController.saveStateToFile(selectedFile);
@@ -64,8 +64,7 @@ class SaveItemMouseListener implements MouseListener {
                 File selectedFile = fileChooser.getSelectedFile();
 
                 if (selectedFile != null) {
-                    File selectedDir = selectedFile.getParentFile();
-                    menuBar.setCurrentDir(selectedDir);
+                    menuBar.currentDir = selectedFile.getParentFile();
                 }
             }
             else {

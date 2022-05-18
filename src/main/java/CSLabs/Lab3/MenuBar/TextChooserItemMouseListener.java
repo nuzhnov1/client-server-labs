@@ -22,7 +22,7 @@ class TextChooserItemMouseListener implements MouseListener {
             );
 
             if (selectedText != null)
-                menuBar.setImagedText(selectedText);
+                menuBar.imagedText = selectedText;
         }
         else if (SwingUtilities.isRightMouseButton(e)) {
             JOptionPane.showMessageDialog(

@@ -26,33 +26,25 @@ public class TCPServer {
 
     private final IWorker worker;
     private final ServerSocket serverSocket;
-    private final ThreadGroup threadGroup;
+    private final ThreadGroup threadGroup = new ThreadGroup(String.format("Server%d thread group", instancesCount));
     private InetSocketAddress socketAddress;
-    private int maxConnections;
+    private int maxConnections = -1;
 
-    private volatile String serverName;
-    private volatile PrintStream logStream;
-    private volatile ServerStatus status;
-    private volatile boolean isLogging;
+    private volatile String serverName = String.format("Server%d", instancesCount++);
+    private volatile PrintStream logStream = System.out;
+    private volatile ServerStatus status = ServerStatus.NOT_RUNNING;
+    private volatile boolean isLogging = true;
 
     // Constructors:
 
     private TCPServer(IWorker clientWorker) throws IOException {
         worker = clientWorker;
         serverSocket = new ServerSocket();
-        threadGroup = new ThreadGroup(String.format("Server%d thread group", instancesCount));
-        maxConnections = 0;
-        serverName = String.format("Server%d", instancesCount++);
-        logStream = System.out;
-        status = ServerStatus.NOT_RUNNING;
-        isLogging = true;
-
-        serverSocket.setOption(StandardSocketOptions.SO_KEEPALIVE, true);
     }
 
     public TCPServer(IWorker clientWorker, int port) throws IOException {
         this(clientWorker);
-        socketAddress = new InetSocketAddress(port);
+        socketAddress = new InetSocketAddress(InetAddress.getLocalHost(), port);
     }
 
     public TCPServer(IWorker clientWorker, InetAddress address, int port) throws IOException {
@@ -73,7 +65,6 @@ public class TCPServer {
 
         try {
             status = ServerStatus.ACTIVE;
-
             serverSocket.bind(socketAddress, maxConnections);
             serverSocket.setSoTimeout(WAITTIME);
             log(String.format("%s: начинаю свою работу.", serverName));
@@ -95,7 +86,7 @@ public class TCPServer {
         catch (SocketException error) {
             String message = String.format(
                     "%s: критическая ошибка. Не удалось установить значение таймаута. " +
-                            "Ошибка в базовом протоколе TCP. Сообщение ошибки: %s.",
+                    "Ошибка в базовом протоколе TCP. Сообщение ошибки: %s.",
                     serverName, error.getMessage()
             );
 
@@ -249,8 +240,5 @@ public class TCPServer {
     }
     public void setPerformance(int connectionTime, int latency, int bandwidth) {
         serverSocket.setPerformancePreferences(connectionTime, latency, bandwidth);
-    }
-    public <T> void setOption(SocketOption<T> name, T value) throws IOException {
-        serverSocket.setOption(name, value);
     }
 }
