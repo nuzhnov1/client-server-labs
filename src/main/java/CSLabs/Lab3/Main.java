@@ -17,7 +17,7 @@ public class Main extends JFrame {
 
     // Data members:
 
-    private static String[] s_args;
+    private static int localServerPort;
 
     // Constructors:
 
@@ -45,12 +45,14 @@ public class Main extends JFrame {
 
     // Getters:
 
-    public static String[] getArgs() { return s_args;}
+    public static int getLocalServerPort() { return localServerPort; }
 
     // Entry point:
 
     public static void main(String[] args) throws InterruptedException {
-        s_args = args;
+        int len = args.length;
+        localServerPort = Integer.parseInt(args[len - 1]);
+
         Main main = getInstance();
 
         while (main.isShowing()) {

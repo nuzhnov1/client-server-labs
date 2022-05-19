@@ -6,6 +6,7 @@ import CSLabs.Lab3.Network.TCPServer;
 
 import javax.swing.*;
 import java.io.*;
+import java.net.InetAddress;
 
 @SuppressWarnings("unused")
 public class Controller {
@@ -16,11 +17,11 @@ public class Controller {
     // Constructors:
 
     public Controller() {
-        String[] args = Main.getArgs();
-        int port = (args.length > 4) ? Integer.parseInt(args[4]) : 5782;
-
         try {
-            server = new TCPServer(Controller::serverControl, port);
+            server = new TCPServer(
+                    Controller::serverControl,
+                    InetAddress.getLocalHost(), Main.getLocalServerPort()
+            );
         }
         catch (Exception error) {
             JOptionPane.showMessageDialog(

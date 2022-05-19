@@ -16,6 +16,7 @@ public class CloseListener implements MouseListener {
         if (SwingUtilities.isLeftMouseButton(e)) {
             try {
                 menuBar.client.work(CloseListener::Close);
+                menuBar.client.close();
             }
             catch (Exception error) {
                 JOptionPane.showMessageDialog(

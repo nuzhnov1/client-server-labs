@@ -40,7 +40,7 @@
 
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/server/resources</directory>
                 <targetPath>build/resources</targetPath>
             </resource>
         </resources>
