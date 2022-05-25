@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f89ea5f3-38df-4c55-bef1-4ecb2416ba52" name="Changes" comment="Implemented Lab4" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="25S3AvVerbIdRDutEqxK2NGDwPS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="198" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/CSLabs/Lab4/Client" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/CSLabs/Lab4/Client" />
+      <recent name="$PROJECT_DIR$/src/main/java/CSLabs/Lab4/Client/MenuBar" />
+      <recent name="$PROJECT_DIR$/src/main/java/CSLabs/Lab4/Server/MenuBar" />
+      <recent name="$PROJECT_DIR$/src/main/java/CSLabs/Lab4" />
+      <recent name="$PROJECT_DIR$/src/main/java/CSLabs/Lab3" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/images" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="Lab1" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="CSLabs.Lab4.MenuBar" />
+      <recent name="CSLabs.Lab4.Server.MenuBar" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JAR Application.Lab4_Client">
+    <configuration name="Lab1" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="CSLabs.Lab1.Main" />
+      <module name="client-server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Lab2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="CSLabs.Lab2.Main" />
+      <module name="client-server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Lab1" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/build/client-server-labs.jar" />
+      <option name="VM_PARAMETERS" value="-cp build/cs-labs.jar CSLabs.Lab1.Main" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-17" />
+      <module name="client-server" />
+      <method v="2">
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="package" />
+      </method>
+    </configuration>
+    <configuration name="Lab2" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/build/client-server-labs.jar" />
+      <option name="VM_PARAMETERS" value="-cp build/cs-labs.jar CSLabs.Lab2.Main" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <module name="client-server" />
+      <method v="2">
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="package" />
+      </method>
+    </configuration>
+    <configuration name="Lab3_Client" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/build/client-server-labs.jar" />
+      <option name="VM_PARAMETERS" value="-cp build/cs-labs.jar CSLabs.Lab3.Main" />
+      <option name="PROGRAM_PARAMETERS" value="5782" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="package" />
+      </method>
+    </configuration>
+    <configuration name="Lab3_Server" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/build/client-server-labs.jar" />
+      <option name="VM_PARAMETERS" value="-cp build/cs-labs.jar CSLabs.Lab3.Main" />
+      <option name="PROGRAM_PARAMETERS" value="5781" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="package" />
+      </method>
+    </configuration>
+    <configuration name="Lab4_Client" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/build/client-server-labs.jar" />
+      <option name="VM_PARAMETERS" value="-cp build/cs-labs.jar CSLabs.Lab4.Main" />
+      <option name="PROGRAM_PARAMETERS" value="6001 6002 7001 7002" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Lab4_Server" type="JarApplication">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/build/client-server-labs.jar" />
+      <option name="VM_PARAMETERS" value="-cp build/cs-labs.jar CSLabs.Lab4.Main" />
+      <option name="PROGRAM_PARAMETERS" value="7001 7002 6001 6002" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="package" />
+      </method>
+    </configuration>
+    <configuration name="client-server [install]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Lab1" />
+      <item itemvalue="Application.Lab2" />
+      <item itemvalue="JAR Application.Lab2" />
+      <item itemvalue="JAR Application.Lab3_Server" />
+      <item itemvalue="JAR Application.Lab3_Client" />
+      <item itemvalue="JAR Application.Lab4_Server" />
+      <item itemvalue="JAR Application.Lab4_Client" />
+      <item itemvalue="JAR Application.Lab1" />
+      <item itemvalue="Maven.client-server [install]" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+    <option name="sshConnectionType" value="PRIVATE_KEY" />
+    <option name="sshUserName" value="sunman24" />
+    <option name="sshPrivateKeyPath" value="$USER_HOME$/.ssh/github_rsa" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f89ea5f3-38df-4c55-bef1-4ecb2416ba52" name="Changes" comment="" />
+      <created>1645506526424</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645506526424</updated>
+      <workItem from="1645506528961" duration="2222000" />
+      <workItem from="1646025715001" duration="13000" />
+      <workItem from="1647748578338" duration="31621000" />
+      <workItem from="1647831156797" duration="14765000" />
+      <workItem from="1647862505144" duration="14919000" />
+      <workItem from="1647910536450" duration="2606000" />
+      <workItem from="1647925387260" duration="1290000" />
+      <workItem from="1650071045667" duration="6869000" />
+      <workItem from="1650082048146" duration="1450000" />
+      <workItem from="1650091824801" duration="6715000" />
+      <workItem from="1650156008160" duration="37873000" />
+      <workItem from="1650206462927" duration="1188000" />
+      <workItem from="1650257963237" duration="32667000" />
+      <workItem from="1650328094233" duration="2122000" />
+      <workItem from="1650344712741" duration="9347000" />
+      <workItem from="1650432686478" duration="7824000" />
+      <workItem from="1650465937743" duration="6219000" />
+      <workItem from="1650503322599" duration="6766000" />
+      <workItem from="1650599326251" duration="19264000" />
+      <workItem from="1650627122363" duration="10545000" />
+      <workItem from="1650697176763" duration="26106000" />
+      <workItem from="1650771952351" duration="33930000" />
+      <workItem from="1650856894285" duration="34436000" />
+      <workItem from="1650936752729" duration="1533000" />
+      <workItem from="1652670218714" duration="44161000" />
+      <workItem from="1652750207727" duration="24361000" />
+      <workItem from="1652785377269" duration="11778000" />
+      <workItem from="1652837410443" duration="3906000" />
+      <workItem from="1652841520738" duration="20457000" />
+      <workItem from="1652864816106" duration="79000" />
+      <workItem from="1652868800818" duration="14723000" />
+      <workItem from="1652929036471" duration="4848000" />
+      <workItem from="1652934008759" duration="4101000" />
+      <workItem from="1653393877505" duration="1718000" />
+      <workItem from="1653489141919" duration="1128000" />
+    </task>
+    <task id="LOCAL-00001" summary="Did the first lab work">
+      <created>1647874236632</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647874236632</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Did the first lab work">
+      <created>1647911200558</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647911200558</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Did the first lab work">
+      <created>1647913148718</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1647913148718</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Did the first lab work">
+      <created>1647925754791</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1647925754791</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Refactoring first lab">
+      <created>1650098315049</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1650098315049</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Refactoring first lab">
+      <created>1650156337277</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1650156337277</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added the Maven pom file, reorganized the project structure.">
+      <created>1650883736840</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1650883736841</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added the Maven pom file, reorganized the project structure.">
+      <created>1650883786712</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1650883786712</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Implemented Lab2">
+      <created>1650883895155</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1650883895155</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Refactored the code in Lab2, fixed some bugs">
+      <created>1650905535833</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1650905535833</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Refactored the code in Lab2">
+      <created>1652675054215</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1652675054215</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Created Lab3, copied files from Lab2 to Lab3">
+      <created>1652675501909</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1652675501909</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Implemented Network package in Lab3">
+      <created>1652709586293</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1652709586293</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Implemented Lab3">
+      <created>1652854963549</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1652854963549</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Refactored Lab3">
+      <created>1652864650378</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1652864650378</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Fixed some bugs in Lab3">
+      <created>1652938371501</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1652938371501</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Implemented Lab4">
+      <created>1652938423047</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1652938423047</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Did the first lab work" />
+    <MESSAGE value="Refactoring first lab" />
+    <MESSAGE value="Added the Maven pom file, reorganized the project structure." />
+    <MESSAGE value="Implemented Lab2" />
+    <MESSAGE value="Refactored the code in Lab2, fixed some bugs" />
+    <MESSAGE value="Refactored the code in Lab2" />
+    <MESSAGE value="Created Lab3, copied files from Lab2 to Lab3" />
+    <MESSAGE value="Implemented Network package in Lab3" />
+    <MESSAGE value="Implemented Lab3" />
+    <MESSAGE value="Refactored Lab3" />
+    <MESSAGE value="Fixed some bugs in Lab3" />
+    <MESSAGE value="Implemented Lab4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented Lab4" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NoClassDefFoundError" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.jdks/openjdk-17.0.2/lib/src.zip!/java.base/java/io/Serializable.java</url>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/CSLabs/Lab3/Figures/Figure.java</url>
+          <line>136</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/CSLabs/Lab3/MainPanel/Controller.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/CSLabs/Lab4/Main.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-defaults>
+        <breakpoint suspend="THREAD" type="java-line" />
+      </breakpoints-defaults>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="JarApplication">
+        <watch expression="readBytes" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
